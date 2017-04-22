@@ -301,7 +301,7 @@ inline void TickTockShield::modifyAlarmFlag()
 	turnOffLED();
 	if(key_pin_pressed == KEY_UP)
 	{
-		alarm_temp.flag_enable = ~alarm_temp.flag_enable;
+		alarm_temp.flag_enable = (~alarm_temp.flag_enable) & 0x01;
 	}
 	if(alarm_temp.flag_enable)
 	{
