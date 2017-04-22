@@ -147,6 +147,8 @@ void clockStart()
         ticktockshield.processKey();
         system_states = SYSTEM_ADJUSTING;
       }
+      // rtsp: auto adjust display brightness every iteration
+      ticktockshield.adjustBrightness(ticktockshield.getLightLevel());
 
     }
   }
