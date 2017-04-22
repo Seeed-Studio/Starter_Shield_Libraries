@@ -177,7 +177,7 @@ int16_t TickTockShield::scanKey()
 	
 	if(digitalRead(KEY_UP) == LOW)
 	{
-		delay(20);
+		delay(50);
 		if(digitalRead(KEY_UP) == LOW)
 		{
 			pin_number = KEY_UP;
@@ -191,7 +191,7 @@ int16_t TickTockShield::scanKey()
 	}
 	else if(digitalRead(KEY_DOWN) == LOW)
 	{
-		delay(20);
+		delay(50);
 		if(digitalRead(KEY_DOWN) == LOW)
 		{
 			pin_number = KEY_DOWN;
