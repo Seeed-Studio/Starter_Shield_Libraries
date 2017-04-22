@@ -409,7 +409,7 @@ void TickTockShield::adjustBrightness()
 	}
 	else if(key_pin_pressed == KEY_UP)
 	{
-		if(g_brightness_temp< 7)
+		if(g_brightness_temp< 3)
 			g_brightness_temp++;
 	}
 	tm1636.set(g_brightness_temp);
