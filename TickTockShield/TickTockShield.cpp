@@ -177,7 +177,7 @@ int16_t TickTockShield::scanKey()
 	
 	if(digitalRead(KEY_UP) == LOW)
 	{
-		delay(20);
+		delay(50);
 		if(digitalRead(KEY_UP) == LOW)
 		{
 			pin_number = KEY_UP;
@@ -191,7 +191,7 @@ int16_t TickTockShield::scanKey()
 	}
 	else if(digitalRead(KEY_DOWN) == LOW)
 	{
-		delay(20);
+		delay(50);
 		if(digitalRead(KEY_DOWN) == LOW)
 		{
 			pin_number = KEY_DOWN;
@@ -301,7 +301,7 @@ inline void TickTockShield::modifyAlarmFlag()
 	turnOffLED();
 	if(key_pin_pressed == KEY_UP)
 	{
-		alarm_temp.flag_enable = ~alarm_temp.flag_enable;
+		alarm_temp.flag_enable = (~alarm_temp.flag_enable) & 0x01;
 	}
 	if(alarm_temp.flag_enable)
 	{
@@ -409,7 +409,7 @@ void TickTockShield::adjustBrightness()
 	}
 	else if(key_pin_pressed == KEY_UP)
 	{
-		if(g_brightness_temp< 7)
+		if(g_brightness_temp< 3)
 			g_brightness_temp++;
 	}
 	tm1636.set(g_brightness_temp);
@@ -467,17 +467,13 @@ float TickTockShield::getLightIntensity()
 
 uint8_t TickTockShield::getLightLevel()
 {
-	uint16_t resistance;
+	float resistance;
 	uint8_t light_level;
-	resistance = (uint16_t)getLightIntensity();
-	if(resistance < 10) light_level = 0;
-	else if(resistance < 50)light_level = 1;
-	else if(resistance < 80)light_level = 2;
-	else if(resistance < 110)light_level = 3;
-	else if(resistance < 140)light_level = 4;
-	else if(resistance < 170)light_level = 5;
-	else if(resistance < 200)light_level = 6;
-	else light_level = 7;
+	resistance = getLightIntensity();
+	if(resistance < 3) light_level = 3;
+	else if(resistance < 10)light_level = 2;
+	else if(resistance < 20)light_level = 1;
+	else light_level = 0;
 	return light_level;
 }
 

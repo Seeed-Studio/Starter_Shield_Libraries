@@ -147,6 +147,8 @@ void clockStart()
         ticktockshield.processKey();
         system_states = SYSTEM_ADJUSTING;
       }
+      // rtsp: auto adjust display brightness every iteration
+      ticktockshield.adjustBrightness(ticktockshield.getLightLevel());
 
     }
   }
@@ -217,7 +219,7 @@ void Timer2ISR()
   }
   flag_update = 1;
   flag_clockpoint = (~flag_clockpoint) & 0x01;//change between 0 and 1 every 500ms.
-  flag_500ms_blink = ~flag_500ms_blink;
+  flag_500ms_blink = (~flag_500ms_blink) & 0x01;
   if(ticktockshield.isAdjustingTime())
   {
     if(g_hand == HOUR)
